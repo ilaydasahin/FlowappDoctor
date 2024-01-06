@@ -1,0 +1,77 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.sahin.flowapp.doctor'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.sahin.flowapp.doctor"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.7.0-alpha03'
+    implementation 'com.google.android.material:material:1.12.0-alpha02'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.0-alpha02'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.0-alpha02'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+
+    // Use the appropriate version for Material Components
+    implementation 'com.squareup:android-times-square:1.7.11@aar'
+    androidTestImplementation 'androidx.test:runner:1.6.0-alpha05' // Use the appropriate version
+    androidTestImplementation 'androidx.test:rules:1.6.0-alpha02'  // Use the appropriate version
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.0-alpha02'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    // RecyclerView
+    implementation 'androidx.recyclerview:recyclerview:1.4.0-alpha01'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    // https://mvnrepository.com/artifact/com.squareup/android-times-square
+    implementation group: 'com.squareup', name: 'android-times-square', version: '1.7.11'
+    implementation 'com.prolificinteractive:material-calendarview:1.4.2'
+    // ConstraintLayout
+    implementation "androidx.constraintlayout:constraintlayout:2.2.0-alpha13"
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.google.android.material:material:1.11.0'
+    // Use the appropriate version for Material Components
+    implementation 'com.squareup:android-times-square:1.7.11@aar'
+    androidTestImplementation 'androidx.test:runner:1.6.0-alpha05' // Use the appropriate version
+    androidTestImplementation 'androidx.test:rules:1.6.0-alpha02'  // Use the appropriate version
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.0-alpha02'
+    // LiveData & ViewModel (Architecture Components)
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.6.2'
+    // ViewModel
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.6.2'
+    // WorkManager
+    implementation 'androidx.work:work-runtime:2.9.0'
+
+}
