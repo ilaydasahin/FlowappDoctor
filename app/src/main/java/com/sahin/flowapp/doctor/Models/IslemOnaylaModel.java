@@ -1,6 +1,6 @@
 package com.sahin.flowapp.doctor.Models;
 
-public class AsiOnaylaModel{
+public class IslemOnaylaModel {
 	private boolean tf;
 	private String text;
 
@@ -23,7 +23,7 @@ public class AsiOnaylaModel{
 	@Override
  	public String toString(){
 		return 
-			"AsiOnaylaModel{" + 
+			"IslemOnaylaModel{" +
 			"tf = '" + tf + '\'' + 
 			",text = '" + text + '\'' + 
 			"}";

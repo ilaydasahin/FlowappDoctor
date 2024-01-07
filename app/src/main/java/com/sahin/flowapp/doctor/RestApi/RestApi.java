@@ -2,7 +2,7 @@ package com.sahin.flowapp.doctor.RestApi;
 
 
 import com.sahin.flowapp.doctor.Models.AsiEkleModel;
-import com.sahin.flowapp.doctor.Models.AsiOnaylaModel;
+import com.sahin.flowapp.doctor.Models.IslemOnaylaModel;
 import com.sahin.flowapp.doctor.Models.CevaplaModel;
 import com.sahin.flowapp.doctor.Models.DuyuruEkleModel;
 import com.sahin.flowapp.doctor.Models.DuyuruModel;
@@ -36,19 +36,19 @@ public interface RestApi {
 
     @FormUrlEncoded
     @POST("/flowservis/duyurusil.php")
-    Call<DuyuruSilModel> duyuruSil(@Field("id") String id);
+    Call<DuyuruSilModel> duyuruSil(@Field("id") String duyid);
 
     @FormUrlEncoded
     @POST("/flowservis/doktorislemtakip.php")
     Call<List<PatientIslemTakipModel>> getPatientIslemTakip(@Field("tarih") String tarih);
 
     @FormUrlEncoded
-    @POST("/flowservis/asionayla.php")
-    Call<AsiOnaylaModel> asiOnayla(@Field("id") String id);
+    @POST("/flowservis/islemonayla.php")
+    Call<IslemOnaylaModel> islemOnayla(@Field("id") String id);
 
     @FormUrlEncoded
-    @POST("/flowservis/asiiptal.php")
-    Call<AsiOnaylaModel> asiIptal(@Field("id") String id);
+    @POST("/flowservis/islemiptal.php")
+    Call<IslemOnaylaModel> islemIptal(@Field("id") String id);
 
     @GET("/flowservis/sorular.php")
     Call<List<SoruModel>> getSoru();

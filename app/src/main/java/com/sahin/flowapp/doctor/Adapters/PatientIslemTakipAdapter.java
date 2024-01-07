@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sahin.flowapp.doctor.Models.AsiOnaylaModel;
+import com.sahin.flowapp.doctor.Models.IslemOnaylaModel;
 import com.sahin.flowapp.doctor.Models.PatientIslemTakipModel;
 import com.sahin.flowapp.doctor.R;
 import com.sahin.flowapp.doctor.RestApi.ManagerAll;
@@ -57,13 +57,13 @@ public class PatientIslemTakipAdapter extends RecyclerView.Adapter<PatientIslemT
         holder.islemTakipQrButon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ara(list.get(position).getTelefon());
+                arama(list.get(position).getTelefon());
             }
         });
         holder.islemTakipOkButon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                asiOnayla(list.get(position).getIslemid(), position);
+                islemOnayla(list.get(position).getIslemid(), position);
             }
         });
         holder.islemTakipCancelButon.setOnClickListener(new View.OnClickListener() {
@@ -107,39 +107,39 @@ public class PatientIslemTakipAdapter extends RecyclerView.Adapter<PatientIslemT
 
     }
 
-    public void ara(String numara) {
+    public void arama(String tel) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("tel:" + numara));
+        intent.setData(Uri.parse("tel:" + tel));
         activity.startActivity(intent);
     }
 
-    public void asiOnayla(String id, final int position) {
-        Call<AsiOnaylaModel> req = ManagerAll.getInstance().asiOnayla(id);
-        req.enqueue(new Callback<AsiOnaylaModel>() {
+    public void islemOnayla(String id, final int position) {
+        Call<IslemOnaylaModel> req = ManagerAll.getInstance().islemOnayla(id);
+        req.enqueue(new Callback<IslemOnaylaModel>() {
             @Override
-            public void onResponse(Call<AsiOnaylaModel> call, Response<AsiOnaylaModel> response) {
+            public void onResponse(Call<IslemOnaylaModel> call, Response<IslemOnaylaModel> response) {
                 Toast.makeText(context, response.body().getText(), Toast.LENGTH_LONG).show();
                 deleteToList(position);
             }
 
             @Override
-            public void onFailure(Call<AsiOnaylaModel> call, Throwable t) {
+            public void onFailure(Call<IslemOnaylaModel> call, Throwable t) {
                 Toast.makeText(context, Warnings.internetProblemText, Toast.LENGTH_LONG).show();
             }
         });
     }
 
     public void onaylama(String id, final int position) {
-        Call<AsiOnaylaModel> req = ManagerAll.getInstance().asiIptal(id);
-        req.enqueue(new Callback<AsiOnaylaModel>() {
+        Call<IslemOnaylaModel> req = ManagerAll.getInstance().islemIptal(id);
+        req.enqueue(new Callback<IslemOnaylaModel>() {
             @Override
-            public void onResponse(Call<AsiOnaylaModel> call, Response<AsiOnaylaModel> response) {
+            public void onResponse(Call<IslemOnaylaModel> call, Response<IslemOnaylaModel> response) {
                 Toast.makeText(context, response.body().getText(), Toast.LENGTH_LONG).show();
                 deleteToList(position);
             }
 
             @Override
-            public void onFailure(Call<AsiOnaylaModel> call, Throwable t) {
+            public void onFailure(Call<IslemOnaylaModel> call, Throwable t) {
                 Toast.makeText(context, Warnings.internetProblemText, Toast.LENGTH_LONG).show();
             }
         });

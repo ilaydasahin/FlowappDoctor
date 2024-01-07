@@ -2,7 +2,7 @@ package com.sahin.flowapp.doctor.RestApi;
 
 
 import com.sahin.flowapp.doctor.Models.AsiEkleModel;
-import com.sahin.flowapp.doctor.Models.AsiOnaylaModel;
+import com.sahin.flowapp.doctor.Models.IslemOnaylaModel;
 import com.sahin.flowapp.doctor.Models.CevaplaModel;
 import com.sahin.flowapp.doctor.Models.DuyuruEkleModel;
 import com.sahin.flowapp.doctor.Models.DuyuruModel;
@@ -47,13 +47,13 @@ public class ManagerAll extends BaseManager {
         return x;
     }
 
-    public Call<AsiOnaylaModel> asiOnayla(String id) {
-        Call<AsiOnaylaModel> x = getRestApi().asiOnayla(id);
+    public Call<IslemOnaylaModel> islemOnayla(String id) {
+        Call<IslemOnaylaModel> x = getRestApi().islemOnayla(id);
         return x;
     }
 
-    public Call<AsiOnaylaModel> asiIptal(String id) {
-        Call<AsiOnaylaModel> x = getRestApi().asiIptal(id);
+    public Call<IslemOnaylaModel> islemIptal(String id) {
+        Call<IslemOnaylaModel> x = getRestApi().islemIptal(id);
         return x;
     }
 
