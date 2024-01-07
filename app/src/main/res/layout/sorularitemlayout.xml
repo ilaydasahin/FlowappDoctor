@@ -28,7 +28,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/soruKullaniciText"
+                    android:id="@+id/sormaKullaniciText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
@@ -38,7 +38,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/soruSoruText"
+                    android:id="@+id/sormaSoruText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="25dp"
@@ -55,7 +55,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/soruCevaplaButon"
+                    android:id="@+id/cevaplamabuton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -63,7 +63,7 @@
                     android:background="@drawable/cevaplamabuton" />
 
                 <ImageView
-                    android:id="@+id/soruAramaButon"
+                    android:id="@+id/sormaAramaButon"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"

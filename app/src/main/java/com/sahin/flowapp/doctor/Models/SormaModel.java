@@ -1,19 +1,19 @@
 package com.sahin.flowapp.doctor.Models;
 
-public class SoruModel{
-	private String musid;
+public class SormaModel {
+	private String hemid;
 	private boolean tf;
 	private String soruid;
 	private String telefon;
 	private String kadi;
 	private String soru;
 
-	public void setMusid(String musid){
-		this.musid = musid;
+	public void setHemid(String hemid){
+		this.hemid = hemid;
 	}
 
-	public String getMusid(){
-		return musid;
+	public String getHemid(){
+		return hemid;
 	}
 
 	public void setTf(boolean tf){
@@ -59,8 +59,8 @@ public class SoruModel{
 	@Override
  	public String toString(){
 		return 
-			"SoruModel{" + 
-			"musid = '" + musid + '\'' + 
+			"SormaModel{" +
+			"hemid = '" + hemid + '\'' +
 			",tf = '" + tf + '\'' + 
 			",soruid = '" + soruid + '\'' + 
 			",telefon = '" + telefon + '\'' + 

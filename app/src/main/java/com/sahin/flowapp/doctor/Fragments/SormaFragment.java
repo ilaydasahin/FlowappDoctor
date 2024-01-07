@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.sahin.flowapp.doctor.Adapters.VeterinerSoruAdapter;
-import com.sahin.flowapp.doctor.Models.SoruModel;
+import com.sahin.flowapp.doctor.Adapters.SormaAdapter;
+import com.sahin.flowapp.doctor.Models.SormaModel;
 import com.sahin.flowapp.doctor.R;
 import com.sahin.flowapp.doctor.RestApi.ManagerAll;
 import com.sahin.flowapp.doctor.Utils.ChangeFragments;
@@ -24,34 +24,34 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class SorularFragment extends Fragment {
+public class SormaFragment extends Fragment {
     private View view;
-    private RecyclerView soruRecyView;
-    private List<SoruModel> list;
-    private VeterinerSoruAdapter veterinerSoruAdapter;
-    private ImageView soruBackImage;
+    private RecyclerView sormaRecyView;
+    private List<SormaModel> liste;
+    private SormaAdapter sormaAdapter;
+    private ImageView sormaBackImage;
     private ChangeFragments changeFragments;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_sorular, container, false);
-        tanimla();
+        view = inflater.inflate(R.layout.fragment_sorma, container, false);
+        tanimlama();
         click();
-        istekAt();
+        istek_At();
         return view;
     }
 
-    public void tanimla() {
-        soruRecyView = view.findViewById(R.id.soruRecyView);
-        soruBackImage = view.findViewById(R.id.soruBackImage);
-        soruRecyView.setLayoutManager(new GridLayoutManager(getContext(),1));
-        list = new ArrayList<>();
+    public void tanimlama() {
+        sormaRecyView = view.findViewById(R.id.sormaRecyView);
+        sormaBackImage = view.findViewById(R.id.sormaBackImage);
+        sormaRecyView.setLayoutManager(new GridLayoutManager(getContext(),1));
+        liste = new ArrayList<>();
         changeFragments = new ChangeFragments(getContext());
     }
     public void click(){
-        soruBackImage.setOnClickListener(new View.OnClickListener() {
+        sormaBackImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 changeFragments.change(new HomeFragment());
@@ -59,23 +59,23 @@ public class SorularFragment extends Fragment {
         });
     }
 
-    public void istekAt() {
-        Call<List<SoruModel>> req = ManagerAll.getInstance().getSoru();
-        req.enqueue(new Callback<List<SoruModel>>() {
+    public void istek_At() {
+        Call<List<SormaModel>> req = ManagerAll.getInstance().getSorma();
+        req.enqueue(new Callback<List<SormaModel>>() {
             @Override
-            public void onResponse(Call<List<SoruModel>> call, Response<List<SoruModel>> response) {
+            public void onResponse(Call<List<SormaModel>> call, Response<List<SormaModel>> response) {
                 if (response.body().get(0).isTf()) {
-                    list = response.body();
-                    veterinerSoruAdapter = new VeterinerSoruAdapter(list, getContext(), getActivity());
-                    soruRecyView.setAdapter(veterinerSoruAdapter);
+                    liste = response.body();
+                    sormaAdapter = new SormaAdapter(liste, getContext(), getActivity());
+                    sormaRecyView.setAdapter(sormaAdapter);
                 } else {
-                    Toast.makeText(getContext(), "Veteriner hekime hiç soru sorulmamıştır.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "hekime hiç soru sorulmamıştır.", Toast.LENGTH_LONG).show();
                     changeFragments.change(new HomeFragment());
                 }
             }
 
             @Override
-            public void onFailure(Call<List<SoruModel>> call, Throwable t) {
+            public void onFailure(Call<List<SormaModel>> call, Throwable t) {
 
             }
         });

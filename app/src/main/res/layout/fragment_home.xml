@@ -40,7 +40,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:clickable="true"
-                        android:id="@+id/soruLayout"
+                        android:id="@+id/sormaLayout"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 

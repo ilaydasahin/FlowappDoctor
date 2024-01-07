@@ -3,7 +3,7 @@ package com.sahin.flowapp.doctor.RestApi;
 
 import com.sahin.flowapp.doctor.Models.AsiEkleModel;
 import com.sahin.flowapp.doctor.Models.IslemOnaylaModel;
-import com.sahin.flowapp.doctor.Models.CevaplaModel;
+import com.sahin.flowapp.doctor.Models.CevaplamaModel;
 import com.sahin.flowapp.doctor.Models.DuyuruEkleModel;
 import com.sahin.flowapp.doctor.Models.DuyuruModel;
 import com.sahin.flowapp.doctor.Models.DuyuruSilModel;
@@ -13,7 +13,7 @@ import com.sahin.flowapp.doctor.Models.PatientIslemTakipModel;
 import com.sahin.flowapp.doctor.Models.PetEkleModel;
 import com.sahin.flowapp.doctor.Models.PetModel;
 import com.sahin.flowapp.doctor.Models.PetSilModel;
-import com.sahin.flowapp.doctor.Models.SoruModel;
+import com.sahin.flowapp.doctor.Models.SormaModel;
 
 import java.util.List;
 
@@ -57,13 +57,13 @@ public class ManagerAll extends BaseManager {
         return x;
     }
 
-    public Call<List<SoruModel>> getSoru() {
-        Call<List<SoruModel>> x = getRestApi().getSoru();
+    public Call<List<SormaModel>> getSorma() {
+        Call<List<SormaModel>> x = getRestApi().getSorma();
         return x;
     }
 
-    public Call<CevaplaModel> cevapla(String musid, String soruid, String text) {
-        Call<CevaplaModel> x = getRestApi().cevapla(musid, soruid, text);
+    public Call<CevaplamaModel> cevaplama(String hemid, String soruid, String text) {
+        Call<CevaplamaModel> x = getRestApi().cevaplama(hemid, soruid, text);
         return x;
     }
 

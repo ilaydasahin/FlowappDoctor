@@ -3,7 +3,7 @@ package com.sahin.flowapp.doctor.RestApi;
 
 import com.sahin.flowapp.doctor.Models.AsiEkleModel;
 import com.sahin.flowapp.doctor.Models.IslemOnaylaModel;
-import com.sahin.flowapp.doctor.Models.CevaplaModel;
+import com.sahin.flowapp.doctor.Models.CevaplamaModel;
 import com.sahin.flowapp.doctor.Models.DuyuruEkleModel;
 import com.sahin.flowapp.doctor.Models.DuyuruModel;
 import com.sahin.flowapp.doctor.Models.DuyuruSilModel;
@@ -13,7 +13,7 @@ import com.sahin.flowapp.doctor.Models.PatientIslemTakipModel;
 import com.sahin.flowapp.doctor.Models.PetEkleModel;
 import com.sahin.flowapp.doctor.Models.PetModel;
 import com.sahin.flowapp.doctor.Models.PetSilModel;
-import com.sahin.flowapp.doctor.Models.SoruModel;
+import com.sahin.flowapp.doctor.Models.SormaModel;
 
 import java.util.List;
 
@@ -50,12 +50,12 @@ public interface RestApi {
     @POST("/flowservis/islemiptal.php")
     Call<IslemOnaylaModel> islemIptal(@Field("id") String id);
 
-    @GET("/flowservis/sorular.php")
-    Call<List<SoruModel>> getSoru();
+    @GET("/flowservis/sorma.php")
+    Call<List<SormaModel>> getSorma();
 
     @FormUrlEncoded
-    @POST("/flowservis/cevapla.php")
-    Call<CevaplaModel> cevapla(@Field("musid") String musid, @Field("soruid") String soruid, @Field("text") String text);
+    @POST("/flowservis/cevaplama.php")
+    Call<CevaplamaModel> cevaplama(@Field("hemid") String hemid, @Field("soruid") String soruid, @Field("text") String text);
 
     @GET("/flowservis/kullanicilar.php")
     Call<List<KullanicilarModel>> getKullanicilar();

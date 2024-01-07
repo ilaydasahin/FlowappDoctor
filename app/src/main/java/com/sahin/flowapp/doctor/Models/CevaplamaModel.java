@@ -1,6 +1,6 @@
 package com.sahin.flowapp.doctor.Models;
 
-public class CevaplaModel{
+public class CevaplamaModel {
 	private boolean tf;
 	private String text;
 
@@ -23,7 +23,7 @@ public class CevaplaModel{
 	@Override
  	public String toString(){
 		return 
-			"CevaplaModel{" + 
+			"CevaplamaModel{" +
 			"tf = '" + tf + '\'' + 
 			",text = '" + text + '\'' + 
 			"}";
