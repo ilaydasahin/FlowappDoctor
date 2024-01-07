@@ -15,7 +15,7 @@ import com.sahin.flowapp.doctor.Utils.ChangeFragments;
 
 
 public class HomeFragment extends Fragment {
-    private LinearLayout duyuruLayout, islemTakipLayout, sormaLayout, kullanicilarLayout;
+    private LinearLayout duyuruLayout, islemTakipLayout, sormaLayout, kullaniciLayout;
     private View view;
     public ChangeFragments changeFragments;
 
@@ -34,7 +34,7 @@ public class HomeFragment extends Fragment {
         duyuruLayout = view.findViewById(R.id.duyuruLayout);
         islemTakipLayout = view.findViewById(R.id.islemTakipLayout);
         sormaLayout = view.findViewById(R.id.sormaLayout);
-        kullanicilarLayout = view.findViewById(R.id.kullanicilarLayout);
+        kullaniciLayout = view.findViewById(R.id.kullaniciLayout);
         changeFragments = new ChangeFragments(getContext());
     }
 
@@ -59,10 +59,10 @@ public class HomeFragment extends Fragment {
                 changeFragments.change(new SormaFragment());
             }
         });
-        kullanicilarLayout.setOnClickListener(new View.OnClickListener() {
+        kullaniciLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeFragments.change(new KullanicilarFragment());
+                changeFragments.change(new KullaniciFragment());
             }
         });
     }

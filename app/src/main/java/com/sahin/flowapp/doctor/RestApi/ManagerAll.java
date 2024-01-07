@@ -1,17 +1,17 @@
 package com.sahin.flowapp.doctor.RestApi;
 
 
-import com.sahin.flowapp.doctor.Models.AsiEkleModel;
+import com.sahin.flowapp.doctor.Models.IslemEkleModel;
 import com.sahin.flowapp.doctor.Models.IslemOnaylaModel;
 import com.sahin.flowapp.doctor.Models.CevaplamaModel;
 import com.sahin.flowapp.doctor.Models.DuyuruEkleModel;
 import com.sahin.flowapp.doctor.Models.DuyuruModel;
 import com.sahin.flowapp.doctor.Models.DuyuruSilModel;
 import com.sahin.flowapp.doctor.Models.KullaniciSilModel;
-import com.sahin.flowapp.doctor.Models.KullanicilarModel;
+import com.sahin.flowapp.doctor.Models.KullaniciModel;
 import com.sahin.flowapp.doctor.Models.PatientIslemTakipModel;
 import com.sahin.flowapp.doctor.Models.PetEkleModel;
-import com.sahin.flowapp.doctor.Models.PetModel;
+import com.sahin.flowapp.doctor.Models.PatientModel;
 import com.sahin.flowapp.doctor.Models.PetSilModel;
 import com.sahin.flowapp.doctor.Models.SormaModel;
 
@@ -67,13 +67,12 @@ public class ManagerAll extends BaseManager {
         return x;
     }
 
-    public Call<List<KullanicilarModel>> getKullanicilar() {
-        Call<List<KullanicilarModel>> x = getRestApi().getKullanicilar();
+    public Call<List<KullaniciModel>> getKullanicilar() {
+        Call<List<KullaniciModel>> x = getRestApi().getKullanicilar();
         return x;
     }
-
-    public Call<List<PetModel>> getPets(String musid) {
-        Call<List<PetModel>> x = getRestApi().getPets(musid);
+    public Call<List<PatientModel>> getHasta(String id) {
+        Call<List<PatientModel>> x = getRestApi().getHasta(id);
         return x;
     }
 
@@ -82,8 +81,8 @@ public class ManagerAll extends BaseManager {
         return x;
     }
 
-    public Call<AsiEkleModel> asiEkle(String musid, String petid, String name, String tarih) {
-        Call<AsiEkleModel> x = getRestApi().asiEkle(musid, petid, name, tarih);
+    public Call<IslemEkleModel> asiEkle(String hemid, String hasid, String name, String tarih) {
+        Call<IslemEkleModel> x = getRestApi().asiEkle(hemid, hasid, name, tarih);
         return x;
     }
 

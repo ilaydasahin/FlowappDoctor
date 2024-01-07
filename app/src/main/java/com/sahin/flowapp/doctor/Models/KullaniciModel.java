@@ -1,6 +1,6 @@
 package com.sahin.flowapp.doctor.Models;
 
-public class KullanicilarModel{
+public class KullaniciModel {
 	private boolean tf;
 	private String telefon;
 	private String kadi;
@@ -41,7 +41,7 @@ public class KullanicilarModel{
 	@Override
  	public String toString(){
 		return 
-			"KullanicilarModel{" + 
+			"KullaniciModel{" +
 			"tf = '" + tf + '\'' + 
 			",telefon = '" + telefon + '\'' + 
 			",kadi = '" + kadi + '\'' + 

@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.KullaniciPetlerFragment">
+    tools:context=".Fragments.KullaniciPatientFragment">
 
     <LinearLayout
-        android:id="@+id/petHeader"
+        android:id="@+id/patientHeader"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
@@ -38,34 +38,34 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/userPetListRecView"
+        android:id="@+id/userPatientListeRecView"
         android:layout_width="match_parent"
-        android:layout_below="@+id/petHeader"
+        android:layout_below="@+id/patientHeader"
         android:layout_height="match_parent"
-        android:layout_above="@id/userPetEkle"
+        android:layout_above="@id/userPatientEkle"
         android:visibility="gone">
 
 
     </androidx.recyclerview.widget.RecyclerView>
 
     <ImageView
-        android:id="@+id/petEkleResimYok"
+        android:id="@+id/patientEkleResimYok"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:layout_below="@+id/petHeader"
+        android:layout_below="@+id/patientHeader"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
         android:background="@drawable/ordek"
         android:visibility="gone" />
 
     <TextView
-        android:id="@+id/petEkleUyariText"
+        android:id="@+id/patientEkleUyariText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/petEkleResimYok"
+        android:layout_below="@+id/patientEkleResimYok"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="Bu kullanıcıya ait pet yoktur.Pet ekle butonundan pet ekleyebilirsiniz"
+        android:text="Bu kullanıcıya ait hastayoktur.Hasta ekle butonundan yeni hasta ekleyebilirsiniz"
         android:textColor="#b62a25"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -73,16 +73,15 @@
 
 
     <Button
-        android:id="@+id/userPetEkle"
+        android:id="@+id/userPatientEkle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="5dp"
         android:background="#617afe"
-        android:text="Kulanıcıya Yeni Pet Ekle"
+        android:text="Kulanıcıya Yeni Hasta Ekle"
         android:textColor="#fff"
         android:textStyle="bold" />
 
 
 </RelativeLayout>
-

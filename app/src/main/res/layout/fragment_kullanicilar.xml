@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".Fragments.KullanicilarFragment">
+    tools:context=".Fragments.KullaniciFragment">
     <LinearLayout
         android:id="@+id/duyuruHeader"
         android:layout_width="match_parent"
@@ -39,7 +39,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:id="@+id/kullanicilarRecyView"
+        android:id="@+id/kullanicilarinRecyView"
         android:layout_height="match_parent">
 
     </androidx.recyclerview.widget.RecyclerView>

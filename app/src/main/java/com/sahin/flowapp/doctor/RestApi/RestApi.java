@@ -1,17 +1,17 @@
 package com.sahin.flowapp.doctor.RestApi;
 
 
-import com.sahin.flowapp.doctor.Models.AsiEkleModel;
+import com.sahin.flowapp.doctor.Models.IslemEkleModel;
 import com.sahin.flowapp.doctor.Models.IslemOnaylaModel;
 import com.sahin.flowapp.doctor.Models.CevaplamaModel;
 import com.sahin.flowapp.doctor.Models.DuyuruEkleModel;
 import com.sahin.flowapp.doctor.Models.DuyuruModel;
 import com.sahin.flowapp.doctor.Models.DuyuruSilModel;
+import com.sahin.flowapp.doctor.Models.KullaniciModel;
 import com.sahin.flowapp.doctor.Models.KullaniciSilModel;
-import com.sahin.flowapp.doctor.Models.KullanicilarModel;
 import com.sahin.flowapp.doctor.Models.PatientIslemTakipModel;
+import com.sahin.flowapp.doctor.Models.PatientModel;
 import com.sahin.flowapp.doctor.Models.PetEkleModel;
-import com.sahin.flowapp.doctor.Models.PetModel;
 import com.sahin.flowapp.doctor.Models.PetSilModel;
 import com.sahin.flowapp.doctor.Models.SormaModel;
 
@@ -57,21 +57,26 @@ public interface RestApi {
     @POST("/flowservis/cevaplama.php")
     Call<CevaplamaModel> cevaplama(@Field("hemid") String hemid, @Field("soruid") String soruid, @Field("text") String text);
 
-    @GET("/flowservis/kullanicilar.php")
-    Call<List<KullanicilarModel>> getKullanicilar();
+    @GET("/flowservis/kullanici.php")
+    Call<List<KullaniciModel>> getKullanicilar();
+
 
     @FormUrlEncoded
-    @POST("/veterinerservis/petlerim.php")
-    Call<List<PetModel>> getPets(@Field("musid") String musid);
+    @POST("/veterinerservis/hastalarim.php")
+    Call<List<PatientModel>> getHasta(@Field("hemid") String id);
 
+
+
+
+    //
     @FormUrlEncoded
     @POST("/flowservis/petekle.php")
     Call<PetEkleModel> petEkle(@Field("musid") String musid, @Field("isim") String isim, @Field("tur") String tur, @Field("cins") String cins, @Field("resim") String resim);
 
 
     @FormUrlEncoded
-    @POST("/flowservis/asiekle.php")
-    Call<AsiEkleModel> asiEkle(@Field("musid") String musid, @Field("petid") String petid, @Field("name") String name, @Field("tarih") String tarih);
+    @POST("/flowservis/islemekle.php")
+    Call<IslemEkleModel> asiEkle(@Field("hemid") String hemid, @Field("hasid") String hasid, @Field("name") String name, @Field("tarih") String tarih);
 
 
     @FormUrlEncoded

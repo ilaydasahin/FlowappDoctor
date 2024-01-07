@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.sahin.flowapp.doctor.Adapters.UserAdapter;
-import com.sahin.flowapp.doctor.Models.KullanicilarModel;
+import com.sahin.flowapp.doctor.Adapters.KullaniciAdapter;
+import com.sahin.flowapp.doctor.Models.KullaniciModel;
 import com.sahin.flowapp.doctor.R;
 import com.sahin.flowapp.doctor.RestApi.ManagerAll;
 import com.sahin.flowapp.doctor.Utils.ChangeFragments;
@@ -25,31 +25,31 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class KullanicilarFragment extends Fragment {
+public class KullaniciFragment extends Fragment {
     private View view;
     private ChangeFragments changeFragments;
-    private RecyclerView kullanicilarRecyView;
-    private List<KullanicilarModel> list;
+    private RecyclerView kullanicilarinRecyView;
+    private List<KullaniciModel> liste;
     private ImageView kullanicilarBackImage;
-    private UserAdapter userAdapter;
+    private KullaniciAdapter kullaniciAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_kullanicilar, container, false);
-        tanimla();
+        tanimlama();
         click();
         getKullanicilar();
         return view;
     }
 
-    public void tanimla() {
+    public void tanimlama() {
         changeFragments = new ChangeFragments(getContext());
-        kullanicilarRecyView = view.findViewById(R.id.kullanicilarRecyView);
+        kullanicilarinRecyView = view.findViewById(R.id.kullanicilarinRecyView);
         kullanicilarBackImage = view.findViewById(R.id.kullanicilarBackImage);
-        kullanicilarRecyView.setLayoutManager(new GridLayoutManager(getContext(), 1));
-        list = new ArrayList<>();
+        kullanicilarinRecyView.setLayoutManager(new GridLayoutManager(getContext(), 1));
+        liste = new ArrayList<>();
     }
     public void click()
     {
@@ -62,14 +62,16 @@ public class KullanicilarFragment extends Fragment {
     }
 
     public void getKullanicilar() {
-        Call<List<KullanicilarModel>> req = ManagerAll.getInstance().getKullanicilar();
-        req.enqueue(new Callback<List<KullanicilarModel>>() {
+        Call<List<KullaniciModel>> req = ManagerAll.getInstance().getKullanicilar();
+        req.enqueue(new Callback<List<KullaniciModel>>() {
             @Override
-            public void onResponse(Call<List<KullanicilarModel>> call, Response<List<KullanicilarModel>> response) {
+            public void onResponse(Call<List<KullaniciModel>> call, Response<List<KullaniciModel>> response) {
                 if (response.body().get(0).isTf()) {
-                    list = response.body();
-                    userAdapter = new UserAdapter(list, getContext(), getActivity());
-                    kullanicilarRecyView.setAdapter(userAdapter);
+
+                    //Log.i("kullanici",response.body().toString());
+                    liste = response.body();
+                    kullaniciAdapter = new KullaniciAdapter(liste, getContext(), getActivity());
+                    kullanicilarinRecyView.setAdapter(kullaniciAdapter);
 
 
                 } else {
@@ -79,7 +81,7 @@ public class KullanicilarFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<KullanicilarModel>> call, Throwable t) {
+            public void onFailure(Call<List<KullaniciModel>> call, Throwable t) {
                 Toast.makeText(getContext(), Warnings.internetProblemText, Toast.LENGTH_LONG).show();
             }
         });

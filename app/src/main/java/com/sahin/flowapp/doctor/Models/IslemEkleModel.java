@@ -1,6 +1,6 @@
 package com.sahin.flowapp.doctor.Models;
 
-public class AsiEkleModel{
+public class IslemEkleModel {
 	private boolean tf;
 	private String text;
 
@@ -23,7 +23,7 @@ public class AsiEkleModel{
 	@Override
  	public String toString(){
 		return 
-			"AsiEkleModel{" + 
+			"IslemEkleModel{" +
 			"tf = '" + tf + '\'' + 
 			",text = '" + text + '\'' + 
 			"}";

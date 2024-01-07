@@ -3,12 +3,10 @@ package com.sahin.flowapp.doctor.Adapters;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
+
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,19 +18,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sahin.flowapp.doctor.Fragments.KullaniciPetlerFragment;
-import com.sahin.flowapp.doctor.Models.AsiEkleModel;
-import com.sahin.flowapp.doctor.Models.KullaniciSilModel;
-import com.sahin.flowapp.doctor.Models.KullanicilarModel;
-import com.sahin.flowapp.doctor.Models.PetModel;
+import com.sahin.flowapp.doctor.Models.IslemEkleModel;
+import com.sahin.flowapp.doctor.Models.PatientModel;
 import com.sahin.flowapp.doctor.Models.PetSilModel;
 import com.sahin.flowapp.doctor.R;
 import com.sahin.flowapp.doctor.RestApi.ManagerAll;
 import com.sahin.flowapp.doctor.Utils.ChangeFragments;
 import com.sahin.flowapp.doctor.Utils.Warnings;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 import com.squareup.picasso.Picasso;
 
 
@@ -41,7 +33,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,14 +40,14 @@ import retrofit2.Response;
 
 public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder> {
 
-    List<PetModel> list;
+    List<PatientModel> list;
     Context context;
     Activity activity;
     private final ChangeFragments changeFragments;
     private final String musid;
     private String tarih = "", formatliTarih = "";
 
-    public PetAdapter(List<PetModel> list, Context context, Activity activitiy, String musid) {
+    public PetAdapter(List<PatientModel> list, Context context, Activity activitiy, String musid) {
         this.list = list;
         this.context = context;
         this.activity = activitiy;
@@ -75,8 +66,8 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         //atama işlemleri gerçekleştirilir
-        holder.petNameText.setText(list.get(position).getPetisim().toString());
-        holder.petBilgiText.setText(list.get(position).getPetisim()+" petini silmek için buraya tıklayın");
+        holder.petNameText.setText(list.get(position).getHasisim().toString());
+        holder.petBilgiText.setText(list.get(position).getHasisim()+" petini silmek için buraya tıklayın");
         holder.petBilgiText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,11 +77,11 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder> {
         holder.petAsiEkleLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addAsiEkle(list.get(position).getPetid().toString());
+                addAsiEkle(list.get(position).getHasid().toString());
             }
         });
 
-        Picasso.get().load(list.get(position).getPetresim().toString()).resize(200, 200).into(holder.petImage);
+        Picasso.get().load(list.get(position).getHasresim().toString()).resize(200, 200).into(holder.petImage);
 
     }
 
@@ -167,10 +158,10 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder> {
 
     public void addAsi(String musid, String petid, String asiName, String tarih, final AlertDialog alertDialog) {
 
-        Call<AsiEkleModel> req = ManagerAll.getInstance().asiEkle(musid, petid, asiName, tarih);
-        req.enqueue(new Callback<AsiEkleModel>() {
+        Call<IslemEkleModel> req = ManagerAll.getInstance().asiEkle(musid, petid, asiName, tarih);
+        req.enqueue(new Callback<IslemEkleModel>() {
             @Override
-            public void onResponse(Call<AsiEkleModel> call, Response<AsiEkleModel> response) {
+            public void onResponse(Call<IslemEkleModel> call, Response<IslemEkleModel> response) {
                 if (response.body().isTf()) {
 
                     alertDialog.cancel();
@@ -182,7 +173,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder> {
             }
 
             @Override
-            public void onFailure(Call<AsiEkleModel> call, Throwable t) {
+            public void onFailure(Call<IslemEkleModel> call, Throwable t) {
                 Toast.makeText(context, Warnings.internetProblemText, Toast.LENGTH_LONG).show();
             }
         });
@@ -207,7 +198,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
 
-                petSil(list.get(position).getPetid().toString(), position);
+                petSil(list.get(position).getHasid().toString(), position);
                 alertDialog.cancel();
             }
         });

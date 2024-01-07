@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 import com.sahin.flowapp.doctor.Adapters.PetAdapter;
 import com.sahin.flowapp.doctor.Models.PetEkleModel;
-import com.sahin.flowapp.doctor.Models.PetModel;
+import com.sahin.flowapp.doctor.Models.PatientModel;
 import com.sahin.flowapp.doctor.R;
 import com.sahin.flowapp.doctor.RestApi.ManagerAll;
 import com.sahin.flowapp.doctor.Utils.ChangeFragments;
@@ -37,15 +37,15 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class KullaniciPetlerFragment extends Fragment {
+public class KullaniciPatientFragment extends Fragment {
     private View view;
-    private String musid;
+    private String hemid;
     private ChangeFragments changeFragments;
-    private RecyclerView userPetListRecView;
-    private ImageView petEkleResimYok, petEkleImageView,kullaniciBackImage;
-    private Button userPetEkle;
-    private TextView petEkleUyariText;
-    private List<PetModel> list;
+    private RecyclerView userPatientListeRecView;
+    private ImageView patientEkleResimYok, petEkleImageView,kullaniciBackImage;
+    private Button userPatientEkle;
+    private TextView patientEkleUyariText;
+    private List<PatientModel> liste;
     private PetAdapter petAdapter;
     private Bitmap bitmap;
     private String imageString="";
@@ -55,28 +55,28 @@ public class KullaniciPetlerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_kullanici, container, false);
-        tanimla();
-        getPets(musid);
+        tanimlama();
+        getHasta(hemid);
         click();
         return view;
     }
 
-    public void tanimla() {
-        musid = getArguments().getString("userid").toString();
+    public void tanimlama() {
+        hemid = getArguments().getString("userid").toString();
         changeFragments = new ChangeFragments(getContext());
-        userPetListRecView = view.findViewById(R.id.userPetListRecView);
-        userPetListRecView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        petEkleResimYok = view.findViewById(R.id.petEkleResimYok);
+        userPatientListeRecView = view.findViewById(R.id.userPatientListeRecView);
+        userPatientListeRecView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        patientEkleResimYok = view.findViewById(R.id.patientEkleResimYok);
         kullaniciBackImage = view.findViewById(R.id.kullaniciBackImage);
-        userPetEkle = view.findViewById(R.id.userPetEkle);
-        petEkleUyariText = view.findViewById(R.id.petEkleUyariText);
-        list = new ArrayList<>();
+        userPatientEkle = view.findViewById(R.id.userPatientEkle);
+        patientEkleUyariText = view.findViewById(R.id.patientEkleUyariText);
+        liste = new ArrayList<>();
         bitmap = null;
-
+//Log.i("gelen",hemid):
     }
 
     public void click() {
-        userPetEkle.setOnClickListener(new View.OnClickListener() {
+        userPatientEkle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 petEkleAlert();
@@ -85,24 +85,24 @@ public class KullaniciPetlerFragment extends Fragment {
         kullaniciBackImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeFragments.change(new KullanicilarFragment());
+                changeFragments.change(new KullaniciFragment());
             }
         });
 
     }
 
-    public void getPets(String id) {
-        Call<List<PetModel>> req = ManagerAll.getInstance().getPets(id);
-        req.enqueue(new Callback<List<PetModel>>() {
+    public void getHasta(String id) {
+        Call<List<PatientModel>> req = ManagerAll.getInstance().getHasta(id);
+        req.enqueue(new Callback<List<PatientModel>>() {
             @Override
-            public void onResponse(Call<List<PetModel>> call, Response<List<PetModel>> response) {
+            public void onResponse(Call<List<PatientModel>> call, Response<List<PatientModel>> response) {
                 if (response.body().get(0).isTf()) {
-                    userPetListRecView.setVisibility(View.VISIBLE);
-                    petEkleResimYok.setVisibility(View.GONE);
-                    petEkleUyariText.setVisibility(View.GONE);
-                    list = response.body();
-                    petAdapter = new PetAdapter(list, getContext(), getActivity(), musid);
-                    userPetListRecView.setAdapter(petAdapter);
+                    userPatientListeRecView.setVisibility(View.VISIBLE);
+                    patientEkleResimYok.setVisibility(View.GONE);
+                    patientEkleUyariText.setVisibility(View.GONE);
+                    liste = response.body();
+                    petAdapter = new PetAdapter(liste, getContext(), getActivity(), hemid);
+                    userPatientListeRecView.setAdapter(petAdapter);
 
                     Toast.makeText(getContext(), "Kullanıcıya ait " + response.body().size() + " tane pet bulunmuştur.", Toast.LENGTH_LONG).show();
 
@@ -110,14 +110,14 @@ public class KullaniciPetlerFragment extends Fragment {
                 } else {
 
                     Toast.makeText(getContext(), "Kullanıcıya ait pet bulunamamıştır. ", Toast.LENGTH_LONG).show();
-                    petEkleResimYok.setVisibility(View.VISIBLE);
-                    petEkleUyariText.setVisibility(View.VISIBLE);
-                    userPetListRecView.setVisibility(View.GONE);
+                    patientEkleResimYok.setVisibility(View.VISIBLE);
+                    patientEkleUyariText.setVisibility(View.VISIBLE);
+                    userPatientListeRecView.setVisibility(View.GONE);
                 }
             }
 
             @Override
-            public void onFailure(Call<List<PetModel>> call, Throwable t) {
+            public void onFailure(Call<List<PatientModel>> call, Throwable t) {
                 Toast.makeText(getContext(), Warnings.internetProblemText, Toast.LENGTH_LONG).show();
             }
         });
@@ -155,7 +155,7 @@ public class KullaniciPetlerFragment extends Fragment {
                 if (!imageToString().equals("") && !petEkleNameEditText.getText().toString().equals("") && !petEkleTurEditText.getText().toString().equals("")
                         && !imageToString().equals("") && !petEkleCinsEditText.getText().toString().equals("")) {
 
-                    petEkle(musid, petEkleNameEditText.getText().toString(), petEkleTurEditText.getText().toString(),
+                    petEkle(hemid, petEkleNameEditText.getText().toString(), petEkleTurEditText.getText().toString(),
                             petEkleCinsEditText.getText().toString(), imageToString(), alertDialog);
                     petEkleNameEditText.setText("");
                     petEkleTurEditText.setText("");
@@ -218,7 +218,7 @@ public class KullaniciPetlerFragment extends Fragment {
             public void onResponse(Call<PetEkleModel> call, Response<PetEkleModel> response) {
 
                 if (response.body().isTf()) {
-                    getPets(musid);
+                    getHasta(musid);
                     Toast.makeText(getContext(), response.body().getText(), Toast.LENGTH_LONG).show();
                     alertDialog.cancel();
                 } else {

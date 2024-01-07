@@ -16,9 +16,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sahin.flowapp.doctor.Fragments.KullaniciPetlerFragment;
+import com.sahin.flowapp.doctor.Fragments.KullaniciPatientFragment;
+import com.sahin.flowapp.doctor.Models.KullaniciModel;
 import com.sahin.flowapp.doctor.Models.KullaniciSilModel;
-import com.sahin.flowapp.doctor.Models.KullanicilarModel;
 import com.sahin.flowapp.doctor.R;
 import com.sahin.flowapp.doctor.RestApi.ManagerAll;
 import com.sahin.flowapp.doctor.Utils.ChangeFragments;
@@ -30,15 +30,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
+public class KullaniciAdapter extends RecyclerView.Adapter<KullaniciAdapter.ViewHolder> {
 
-    List<KullanicilarModel> list;
+    List<KullaniciModel> list;
     Context context;
     Activity activity;
-    private final ChangeFragments changeFragments;
+    private ChangeFragments changeFragments;
 
 
-    public UserAdapter(List<KullanicilarModel> list, Context context, Activity activitiy) {
+    public KullaniciAdapter(List<KullaniciModel> list, Context context, Activity activitiy) {
         this.list = list;
         this.context = context;
         this.activity = activitiy;
@@ -56,17 +56,17 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         //atama işlemleri gerçekleştirilir
-        holder.kullanicilarNameText.setText(list.get(position).getKadi());
+        holder.kullanicilarIsımText.setText(list.get(position).getKadi().toString());
         holder.userAramaYapButon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ara(list.get(position).getTelefon());
+                arama(list.get(position).getTelefon().toString());
             }
         });
-        holder.userPetlerButon.setOnClickListener(new View.OnClickListener() {
+        holder.userPatientListButon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeFragments.changeWithParameter(new KullaniciPetlerFragment(), list.get(position).getId());
+                changeFragments.changeWithParameter(new KullaniciPatientFragment(), list.get(position).getId().toString());
             }
         });
         holder.kullanicilarLayout.setOnClickListener(new View.OnClickListener() {
@@ -84,26 +84,26 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView kullanicilarNameText;
-        Button userPetlerButon, userAramaYapButon;
-        CardView userCardView;
+        TextView kullanicilarIsımText;
+        Button userPatientListButon, userAramaYapButon;
+        CardView usersCardView;
         LinearLayout kullanicilarLayout;
 
         //itemview ile listview in her elemanı için layout ile oluşturduğumuz view tanımlanması gerçekleştirilecek
         public ViewHolder(View itemView) {
             super(itemView);
-            kullanicilarNameText = itemView.findViewById(R.id.kullanicilarNameText);
-            userPetlerButon = itemView.findViewById(R.id.userPetListButon);
+            kullanicilarIsımText = itemView.findViewById(R.id.kullanicilarIsımText);
+            userPatientListButon = itemView.findViewById(R.id.userPatientListButon);
             userAramaYapButon = itemView.findViewById(R.id.userAramaYapButon);
-            userCardView = itemView.findViewById(R.id.userCardView);
-            kullanicilarLayout = itemView.findViewById(R.id.kullanicilarLayout);
+            usersCardView = itemView.findViewById(R.id.usersCardView);
+            kullanicilarLayout = itemView.findViewById(R.id.kullaniciLayout);
         }
     }
 
-    public void ara(String numara) {
-        Intent ıntent = new Intent(Intent.ACTION_VIEW);
-        ıntent.setData(Uri.parse("tel:" + numara));
-        activity.startActivity(ıntent);
+    public void arama(String numara) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("telefon:" + numara));
+        activity.startActivity(intent);
     }
 
     public void kullaniciSilOpenAlert(final int position) {
@@ -125,7 +125,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
 
-                kullaniciSil(list.get(position).getId(), position);
+                kullaniciSil(list.get(position).getId().toString(), position);
                 alertDialog.cancel();
             }
         });
@@ -145,10 +145,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             @Override
             public void onResponse(Call<KullaniciSilModel> call, Response<KullaniciSilModel> response) {
                 if (response.body().isTf()) {
-                    Toast.makeText(context, response.body().getText(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, response.body().getText().toString(), Toast.LENGTH_LONG).show();
                     deleteToList(position);
                 } else {
-                    Toast.makeText(context, response.body().getText(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, response.body().getText().toString(), Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -165,7 +165,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void deleteToList(int position) {
         list.remove(position);
         notifyItemRemoved(position);
-        notifyDataSetChanged();
+        notifyDataSetChanged();//silindikden sonra itemlerin indexlerinin yeniden düzenlenmesi yani listenin yenilenmesi için kullandık
+
 
     }
 

@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.sahin.flowapp.doctor.Fragments.KullaniciPetlerFragment;
+import com.sahin.flowapp.doctor.Fragments.KullaniciPatientFragment;
 import com.sahin.flowapp.doctor.R;
 
 public class ChangeFragments {
@@ -26,7 +26,7 @@ public class ChangeFragments {
                 .commit();
     }
     //hasId
-    public void changeWithParameter(KullaniciPetlerFragment fragment, String petid) {
+    public void changeWithParameter(KullaniciPatientFragment fragment, String petid) {
         Bundle bundle=new Bundle();
         //hasid,hasId
         bundle.putString("userid",petid);
