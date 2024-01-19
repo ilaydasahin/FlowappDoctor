@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                card_view:cardBackgroundColor="#D7D7DA"
+                card_view:cardBackgroundColor="#6d8188"
                 card_view:cardElevation="5dp">
 
                 <LinearLayout
@@ -38,7 +38,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="10dp"
                         android:gravity="center"
-                        android:text="Bu ekrandan hastanıza yeni işlem girebilirsiniz."
+                        android:text="Bu ekran hastanıza yeni işlem girebilmenizi sağlar."
                         android:textColor="#fff"
                         android:textSize="20dp"
                         android:textStyle="bold" />
@@ -51,28 +51,29 @@
                         android:layout_marginBottom="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:background="#fff" />
+
+                        android:background="#fff"></CalendarView>
 
 
 
                     <EditText
-                        android:id="@+id/asiEkleAsiName"
+                        android:id="@+id/islemEkleIslemName"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginBottom="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:background="@drawable/edittextback"
-                        android:hint="İşlem ismini giriniz" />
+                        android:hint="işlem ismini giriniz" />
 
 
                     <Button
-                        android:id="@+id/asiEkleButon"
+                        android:id="@+id/islemEkleButon"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:background="#D5C0ED"
+                        android:background="#E6D4F8"
                         android:text="Ekle"
                         android:textColor="#fff"
                         android:layout_marginBottom="10dp"

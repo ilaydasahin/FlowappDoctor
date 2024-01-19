@@ -11,8 +11,8 @@ import com.sahin.flowapp.doctor.Models.KullaniciModel;
 import com.sahin.flowapp.doctor.Models.KullaniciSilModel;
 import com.sahin.flowapp.doctor.Models.PatientIslemTakipModel;
 import com.sahin.flowapp.doctor.Models.PatientModel;
-import com.sahin.flowapp.doctor.Models.PetEkleModel;
-import com.sahin.flowapp.doctor.Models.PetSilModel;
+import com.sahin.flowapp.doctor.Models.PatientEkleModel;
+import com.sahin.flowapp.doctor.Models.PatientSilModel;
 import com.sahin.flowapp.doctor.Models.SormaModel;
 
 import java.util.List;
@@ -62,7 +62,7 @@ public interface RestApi {
 
 
     @FormUrlEncoded
-    @POST("/veterinerservis/hastalarim.php")
+    @POST("/flowservis/hastalarim.php")
     Call<List<PatientModel>> getHasta(@Field("hemid") String id);
 
 
@@ -70,22 +70,24 @@ public interface RestApi {
 
     //
     @FormUrlEncoded
-    @POST("/flowservis/petekle.php")
-    Call<PetEkleModel> petEkle(@Field("musid") String musid, @Field("isim") String isim, @Field("tur") String tur, @Field("cins") String cins, @Field("resim") String resim);
+    @POST("/flowservis/patientekle.php")
+    Call<PatientEkleModel> patientEkle(@Field("hemid") String hemid,@Field("isim") String isim, @Field("tur") String tur, @Field("cins") String cins, @Field("resim") String resim);
 
-
+//
     @FormUrlEncoded
     @POST("/flowservis/islemekle.php")
-    Call<IslemEkleModel> asiEkle(@Field("hemid") String hemid, @Field("hasid") String hasid, @Field("name") String name, @Field("tarih") String tarih);
+    Call<IslemEkleModel> islemEkle(@Field("hemid") String hemid, @Field("hasid") String hasid, @Field("name") String name, @Field("tarih") String tarih);
 
-
+//
+    //
+    //
     @FormUrlEncoded
     @POST("/flowservis/kullanicisil.php")
     Call<KullaniciSilModel> kadiSil(@Field("id") String id);
 
     @FormUrlEncoded
-    @POST("/flowservis/petsil.php")
-    Call<PetSilModel> petSil(@Field("id") String id);
+    @POST("/flowservis/patientsil.php")
+    Call<PatientSilModel> patientSil(@Field("id") String id);
 
 
 }

@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.sahin.flowapp.doctor.Models.IslemEkleModel;
 import com.sahin.flowapp.doctor.Models.PatientModel;
-import com.sahin.flowapp.doctor.Models.PetSilModel;
+import com.sahin.flowapp.doctor.Models.PatientSilModel;
 import com.sahin.flowapp.doctor.R;
 import com.sahin.flowapp.doctor.RestApi.ManagerAll;
 import com.sahin.flowapp.doctor.Utils.ChangeFragments;
@@ -38,20 +38,20 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder> {
+public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHolder> {
 
     List<PatientModel> list;
     Context context;
     Activity activity;
     private final ChangeFragments changeFragments;
-    private final String musid;
+    private final String hemid;
     private String tarih = "", formatliTarih = "";
 
-    public PetAdapter(List<PatientModel> list, Context context, Activity activitiy, String musid) {
+    public PatientAdapter(List<PatientModel> list, Context context, Activity activitiy, String hemid) {
         this.list = list;
         this.context = context;
         this.activity = activitiy;
-        this.musid = musid;
+        this.hemid = hemid;
         changeFragments = new ChangeFragments(context);
     }
 
@@ -59,29 +59,29 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //layout tanımlaması yapılır
-        View view = LayoutInflater.from(context).inflate(R.layout.userpetitemlayout, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.userpatientitemlayout, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         //atama işlemleri gerçekleştirilir
-        holder.petNameText.setText(list.get(position).getHasisim().toString());
-        holder.petBilgiText.setText(list.get(position).getHasisim()+" petini silmek için buraya tıklayın");
-        holder.petBilgiText.setOnClickListener(new View.OnClickListener() {
+        holder.patientNameText.setText(list.get(position).getHasisim().toString());
+        holder.patientBilgiText.setText(list.get(position).getHasisim()+" hastanızı silmek için buraya tıklayın");
+        holder.patientBilgiText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 petSilOpenAlert(position);
             }
         });
-        holder.petAsiEkleLayout.setOnClickListener(new View.OnClickListener() {
+        holder.patientIslemEkleLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addAsiEkle(list.get(position).getHasid().toString());
+                addIslemEkle(list.get(position).getHasid().toString());
             }
         });
 
-        Picasso.get().load(list.get(position).getHasresim().toString()).resize(200, 200).into(holder.petImage);
+        Picasso.get().load(list.get(position).getHasresim().toString()).resize(200, 200).into(holder.patientImage);
 
     }
 
@@ -92,30 +92,30 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView petBilgiText, petNameText;
-        LinearLayout petAsiEkleLayout;
-        ImageView petImage;
+        TextView patientBilgiText, patientNameText;
+        LinearLayout patientIslemEkleLayout;
+        ImageView patientImage;
 
 
         //itemview ile listview in her elemanı için layout ile oluşturduğumuz view tanımlanması gerçekleştirilecek
         public ViewHolder(View itemView) {
             super(itemView);
-            petBilgiText = itemView.findViewById(R.id.petBilgiText);
-            petNameText = itemView.findViewById(R.id.petNameText);
-            petAsiEkleLayout = itemView.findViewById(R.id.petAsiEkleLayout);
-            petImage = itemView.findViewById(R.id.petImage);
+            patientBilgiText = itemView.findViewById(R.id.patientBilgiText);
+            patientNameText = itemView.findViewById(R.id.patientNameText);
+            patientIslemEkleLayout = itemView.findViewById(R.id.patientIslemEkleLayout);
+            patientImage = itemView.findViewById(R.id.patientImage);
         }
     }
 
-    public void addAsiEkle(final String petid) {
+    public void addIslemEkle(final String hasid) {
         //alert diyalog acilması icin kodlama yapmamız lazım
         LayoutInflater layoutInflater = activity.getLayoutInflater();//?
-        View view = layoutInflater.inflate(R.layout.asieklelayout, null);
+        View view = layoutInflater.inflate(R.layout.islemeklelayout, null);
 
         CalendarView calendarView = view.findViewById(R.id.takvim);
-        final EditText asiEkleAsiName = view.findViewById(R.id.asiEkleAsiName);
+        final EditText islemEkleIslemName = view.findViewById(R.id.islemEkleIslemName);
 
-        Button asiEkleButon = view.findViewById(R.id.asiEkleButon);
+        Button islemEkleButon = view.findViewById(R.id.islemEkleButon);
 
 
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
@@ -141,13 +141,13 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder> {
 
             }
         });
-        asiEkleButon.setOnClickListener(new View.OnClickListener() {
+        islemEkleButon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!formatliTarih.equals("") && !asiEkleAsiName.getText().toString().equals("")) {
-                    addAsi(musid, petid, asiEkleAsiName.getText().toString(), formatliTarih, alertDialog);
+                if (!formatliTarih.equals("") && !islemEkleIslemName.getText().toString().equals("")) {
+                    addIslem(hemid, hasid, islemEkleIslemName.getText().toString(), formatliTarih, alertDialog);
                 } else {
-                    Toast.makeText(context, "Tarih seçiniz veya aşı ismi giriniz", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Tarih seçiniz veya işlem ismini giriniz", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -156,9 +156,9 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder> {
 
     }
 
-    public void addAsi(String musid, String petid, String asiName, String tarih, final AlertDialog alertDialog) {
+    public void addIslem(String hemid, String hasid, String name, String tarih, final AlertDialog alertDialog) {
 
-        Call<IslemEkleModel> req = ManagerAll.getInstance().asiEkle(musid, petid, asiName, tarih);
+        Call<IslemEkleModel> req = ManagerAll.getInstance().islemEkle(hemid, hasid, name, tarih);
         req.enqueue(new Callback<IslemEkleModel>() {
             @Override
             public void onResponse(Call<IslemEkleModel> call, Response<IslemEkleModel> response) {
@@ -182,10 +182,10 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder> {
     public void petSilOpenAlert(final int position) {
         //alert diyalog acilması icin kodlama yapmamız lazım
         LayoutInflater layoutInflater = activity.getLayoutInflater();//?
-        View view = layoutInflater.inflate(R.layout.petsillayout, null);
+        View view = layoutInflater.inflate(R.layout.patientsillayout, null);
 
-        Button petSilIptalButon = view.findViewById(R.id.petSilIptalButon);
-        Button petSilButon = view.findViewById(R.id.petSilButon);
+        Button patientSilIptalButon = view.findViewById(R.id.patientSilIptalButon);
+        Button patientSilButon = view.findViewById(R.id.patientSilButon);
 
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
         alert.setView(view);
@@ -194,15 +194,15 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder> {
         final AlertDialog alertDialog = alert.create();
 
 
-        petSilButon.setOnClickListener(new View.OnClickListener() {
+        patientSilButon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                petSil(list.get(position).getHasid().toString(), position);
+                patientSil(list.get(position).getHasid().toString(), position);
                 alertDialog.cancel();
             }
         });
-        petSilIptalButon.setOnClickListener(new View.OnClickListener() {
+        patientSilIptalButon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 alertDialog.cancel();
@@ -212,22 +212,22 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder> {
         alertDialog.show();
     }
 
-    public void petSil(String id, final int position) {
-        Call<PetSilModel> req = ManagerAll.getInstance().petSil(id);
-        req.enqueue(new Callback<PetSilModel>() {
+    public void patientSil(String id, final int position) {
+        Call<PatientSilModel> req = ManagerAll.getInstance().patientSil(id);
+        req.enqueue(new Callback<PatientSilModel>() {
             @Override
-            public void onResponse(Call<PetSilModel> call, Response<PetSilModel> response) {
+            public void onResponse(Call<PatientSilModel> call, Response<PatientSilModel> response) {
                 if (response.body().isTf()) {
-                    Toast.makeText(context, response.body().getText(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, response.body().getText().toString(), Toast.LENGTH_LONG).show();
                     deleteToList(position);
                 } else {
-                    Toast.makeText(context, response.body().getText(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, response.body().getText().toString(), Toast.LENGTH_LONG).show();
                 }
 
             }
 
             @Override
-            public void onFailure(Call<PetSilModel> call, Throwable t) {
+            public void onFailure(Call<PatientSilModel> call, Throwable t) {
                 Toast.makeText(context, Warnings.internetProblemText, Toast.LENGTH_LONG).show();
             }
         });

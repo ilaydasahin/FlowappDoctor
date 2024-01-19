@@ -25,8 +25,8 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="25dp"
                 android:gravity="center"
-                android:text="Peti silmek istiyor musunuz?"
-                android:textColor="#10102c"
+                android:text="Hastayı silmek istiyor musunuz?"
+                android:textColor="#A6A6D5"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -40,25 +40,25 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/petSilButon"
+                    android:id="@+id/patientSilButon"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
-                    android:background="#C9BBEA"
+                    android:background="#A0AAC8"
                     android:text="Evet"
                     android:textColor="#fff"
                     android:textStyle="bold" />
 
                 <Button
-                    android:id="@+id/petSilIptalButon"
+                    android:id="@+id/patientSilIptalButon"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
-                    android:background="#C9BBEA"
+                    android:background="#A0AAC8"
                     android:text="Hayır"
                     android:textColor="#fff"
                     android:textStyle="bold" />

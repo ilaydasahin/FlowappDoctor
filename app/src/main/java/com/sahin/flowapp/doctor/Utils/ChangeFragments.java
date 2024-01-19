@@ -26,10 +26,10 @@ public class ChangeFragments {
                 .commit();
     }
     //hasId
-    public void changeWithParameter(KullaniciPatientFragment fragment, String petid) {
+    public void changeWithParameter(KullaniciPatientFragment fragment, String hasid) {
         Bundle bundle=new Bundle();
         //hasid,hasId
-        bundle.putString("userid",petid);
+        bundle.putString("userid",hasid);
         fragment.setArguments(bundle);
         ((FragmentActivity)context).getSupportFragmentManager().beginTransaction()
                 .replace(R.id.mainFrameLayout,fragment,"fragment")

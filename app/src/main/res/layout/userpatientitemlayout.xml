@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/pertCardView"
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true">
-
+  >
 
     <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-
-
+        android:clickable="true"
+        android:id="@+id/patientCardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
@@ -17,13 +16,13 @@
         android:layout_marginTop="5dp"
         android:layout_weight="1"
 
-        card_view:cardBackgroundColor="#EDEAF4"
+        card_view:cardBackgroundColor="#D8D1F3"
         card_view:cardCornerRadius="10dp"
         card_view:cardElevation="5dp">
 
         <LinearLayout
 
-            android:id="@+id/petAsiEkleLayout"
+            android:id="@+id/patientIslemEkleLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="true"
@@ -31,7 +30,7 @@
 
 
             <ImageView
-                android:id="@+id/petImage"
+                android:id="@+id/patientImage"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center"
@@ -40,22 +39,22 @@
 
             <TextView
 
-                android:id="@+id/petBilgiText"
+                android:id="@+id/patientBilgiText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="10dp"
-                android:textColor="#363062"
-                android:textSize="10dp"
+                android:padding="20dp"
+                android:textColor="#000000"
+                android:textSize="20dp"
                 android:textStyle="bold" />
 
 
             <TextView
 
-                android:id="@+id/petNameText"
+                android:id="@+id/patientNameText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#363062"
+                android:background="#FABDBDBD"
                 android:gravity="center"
                 android:padding="10dp"
                 android:textColor="#fff"

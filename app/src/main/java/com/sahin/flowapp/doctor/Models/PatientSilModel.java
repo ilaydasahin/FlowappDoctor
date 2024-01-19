@@ -1,6 +1,6 @@
 package com.sahin.flowapp.doctor.Models;
 
-public class PetEkleModel{
+public class PatientSilModel {
 	private boolean tf;
 	private String text;
 
@@ -23,7 +23,7 @@ public class PetEkleModel{
 	@Override
  	public String toString(){
 		return 
-			"PetEkleModel{" + 
+			"PatientSilModel{" +
 			"tf = '" + tf + '\'' + 
 			",text = '" + text + '\'' + 
 			"}";

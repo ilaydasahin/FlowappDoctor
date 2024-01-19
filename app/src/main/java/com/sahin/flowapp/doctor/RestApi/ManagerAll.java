@@ -10,9 +10,9 @@ import com.sahin.flowapp.doctor.Models.DuyuruSilModel;
 import com.sahin.flowapp.doctor.Models.KullaniciSilModel;
 import com.sahin.flowapp.doctor.Models.KullaniciModel;
 import com.sahin.flowapp.doctor.Models.PatientIslemTakipModel;
-import com.sahin.flowapp.doctor.Models.PetEkleModel;
+import com.sahin.flowapp.doctor.Models.PatientEkleModel;
 import com.sahin.flowapp.doctor.Models.PatientModel;
-import com.sahin.flowapp.doctor.Models.PetSilModel;
+import com.sahin.flowapp.doctor.Models.PatientSilModel;
 import com.sahin.flowapp.doctor.Models.SormaModel;
 
 import java.util.List;
@@ -76,23 +76,23 @@ public class ManagerAll extends BaseManager {
         return x;
     }
 
-    public Call<PetEkleModel> petEkle(String musid, String isim, String tur, String cins, String resim) {
-        Call<PetEkleModel> x = getRestApi().petEkle(musid, isim, tur, cins, resim);
+    public Call<PatientEkleModel> patientEkle(String hemid ,String isim, String tur, String cins, String resim) {
+        Call<PatientEkleModel> x = getRestApi().patientEkle(hemid,isim, tur, cins, resim);
         return x;
     }
 
-    public Call<IslemEkleModel> asiEkle(String hemid, String hasid, String name, String tarih) {
-        Call<IslemEkleModel> x = getRestApi().asiEkle(hemid, hasid, name, tarih);
+    public Call<IslemEkleModel> islemEkle(String hemid, String hasid, String name, String tarih) {
+        Call<IslemEkleModel> x = getRestApi().islemEkle(hemid, hasid, name, tarih);
         return x;
     }
-
+//
     public Call<KullaniciSilModel> kadiSil(String id) {
         Call<KullaniciSilModel> x = getRestApi().kadiSil(id);
         return x;
     }
 
-    public Call<PetSilModel> petSil(String id) {
-        Call<PetSilModel> x = getRestApi().petSil(id);
+    public Call<PatientSilModel> patientSil(String id) {
+        Call<PatientSilModel> x = getRestApi().patientSil(id);
         return x;
     }
 

@@ -19,8 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sahin.flowapp.doctor.Adapters.PetAdapter;
-import com.sahin.flowapp.doctor.Models.PetEkleModel;
+import com.sahin.flowapp.doctor.Adapters.PatientAdapter;
+import com.sahin.flowapp.doctor.Models.PatientEkleModel;
 import com.sahin.flowapp.doctor.Models.PatientModel;
 import com.sahin.flowapp.doctor.R;
 import com.sahin.flowapp.doctor.RestApi.ManagerAll;
@@ -42,14 +42,13 @@ public class KullaniciPatientFragment extends Fragment {
     private String hemid;
     private ChangeFragments changeFragments;
     private RecyclerView userPatientListeRecView;
-    private ImageView patientEkleResimYok, petEkleImageView,kullaniciBackImage;
+    private ImageView patientEkleResimYok, patientEkleImageView,kullaniciBackImage;
     private Button userPatientEkle;
     private TextView patientEkleUyariText;
     private List<PatientModel> liste;
-    private PetAdapter petAdapter;
+    private PatientAdapter patientAdapter;
     private Bitmap bitmap;
     private String imageString="";
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -67,22 +66,21 @@ public class KullaniciPatientFragment extends Fragment {
         userPatientListeRecView = view.findViewById(R.id.userPatientListeRecView);
         userPatientListeRecView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         patientEkleResimYok = view.findViewById(R.id.patientEkleResimYok);
-        kullaniciBackImage = view.findViewById(R.id.kullaniciBackImage);
-        userPatientEkle = view.findViewById(R.id.userPatientEkle);
         patientEkleUyariText = view.findViewById(R.id.patientEkleUyariText);
+        userPatientEkle = view.findViewById(R.id.userPatientEkle);
         liste = new ArrayList<>();
         bitmap = null;
-//Log.i("gelen",hemid):
+        //Log.i("gelen",hemid):
     }
 
     public void click() {
         userPatientEkle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                petEkleAlert();
+                patientEkleAlert();
             }
         });
-        kullaniciBackImage.setOnClickListener(new View.OnClickListener() {
+        patientEkleUyariText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 changeFragments.change(new KullaniciFragment());
@@ -101,15 +99,15 @@ public class KullaniciPatientFragment extends Fragment {
                     patientEkleResimYok.setVisibility(View.GONE);
                     patientEkleUyariText.setVisibility(View.GONE);
                     liste = response.body();
-                    petAdapter = new PetAdapter(liste, getContext(), getActivity(), hemid);
-                    userPatientListeRecView.setAdapter(petAdapter);
+                    patientAdapter = new PatientAdapter(liste, getContext(), getActivity(), hemid);
+                    userPatientListeRecView.setAdapter(patientAdapter);
 
-                    Toast.makeText(getContext(), "Kullanıcıya ait " + response.body().size() + " tane pet bulunmuştur.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Kullanıcıya ait " + response.body().size() + " tane hasta bulunmuştur.", Toast.LENGTH_LONG).show();
 
 
                 } else {
 
-                    Toast.makeText(getContext(), "Kullanıcıya ait pet bulunamamıştır. ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Kullanıcıya ait hasta bulunamamıştır. ", Toast.LENGTH_LONG).show();
                     patientEkleResimYok.setVisibility(View.VISIBLE);
                     patientEkleUyariText.setVisibility(View.VISIBLE);
                     userPatientListeRecView.setVisibility(View.GONE);
@@ -125,16 +123,17 @@ public class KullaniciPatientFragment extends Fragment {
     }
 
 
-    public void petEkleAlert() {
+
+    public void patientEkleAlert() {
         //alert diyalog acilması icin kodlama yapmamız lazım
         LayoutInflater layoutInflater = this.getLayoutInflater();//?
-        View view = layoutInflater.inflate(R.layout.peteklelayout, null);
-        Button petEkleResimSecButon = view.findViewById(R.id.petEkleResimSecButon);
-        Button petEkleEkleButon = view.findViewById(R.id.petEkleEkleButon);
-        petEkleImageView = view.findViewById(R.id.petEkleImageView);
-        final EditText petEkleNameEditText = view.findViewById(R.id.petEkleNameEditText);
-        final EditText petEkleTurEditText = view.findViewById(R.id.petEkleTurEditText);
-        final EditText petEkleCinsEditText = view.findViewById(R.id.petEkleCinsEditText);
+        View view = layoutInflater.inflate(R.layout.patienteklelayout, null);
+        Button patientEkleResimSecButon = view.findViewById(R.id.patientEkleResimSecButon);
+        Button patientEkleEkleButon = view.findViewById(R.id.patientEkleEkleButon);
+        patientEkleImageView = view.findViewById(R.id.patientEkleImageView);
+        final EditText patientEkleNameEditText = view.findViewById(R.id.patientEkleNameEditText);
+        final EditText patientEkleTurEditText = view.findViewById(R.id.patientEkleTurEditText);
+        final EditText patientEkleCinsEditText = view.findViewById(R.id.patientEkleCinsEditText);
 
 
         AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
@@ -143,23 +142,23 @@ public class KullaniciPatientFragment extends Fragment {
         //artık alert dialogumuzu açabiliriz
         final AlertDialog alertDialog = alert.create();
 
-        petEkleResimSecButon.setOnClickListener(new View.OnClickListener() {
+        patientEkleResimSecButon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 galeriAc();
             }
         });
-        petEkleEkleButon.setOnClickListener(new View.OnClickListener() {
+        patientEkleEkleButon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!imageToString().equals("") && !petEkleNameEditText.getText().toString().equals("") && !petEkleTurEditText.getText().toString().equals("")
-                        && !imageToString().equals("") && !petEkleCinsEditText.getText().toString().equals("")) {
+                if (!imageToString().equals("") && !patientEkleNameEditText.getText().toString().equals("") && !patientEkleTurEditText.getText().toString().equals("")
+                        && !imageToString().equals("") && !patientEkleCinsEditText.getText().toString().equals("")) {
 
-                    petEkle(hemid, petEkleNameEditText.getText().toString(), petEkleTurEditText.getText().toString(),
-                            petEkleCinsEditText.getText().toString(), imageToString(), alertDialog);
-                    petEkleNameEditText.setText("");
-                    petEkleTurEditText.setText("");
-                    petEkleCinsEditText.setText("");
+                    patientEkle(hemid, patientEkleNameEditText.getText().toString(), patientEkleTurEditText.getText().toString(),
+                            patientEkleCinsEditText.getText().toString(), imageToString(), alertDialog);
+                    patientEkleNameEditText.setText("");
+                    patientEkleTurEditText.setText("");
+                    patientEkleCinsEditText.setText("");
 
                 } else {
                     Toast.makeText(getContext(), "Tüm alanların doldurulması ve resmin seçilmesi zorunludur", Toast.LENGTH_LONG).show();
@@ -175,7 +174,7 @@ public class KullaniciPatientFragment extends Fragment {
     public void galeriAc() {
 
         Intent ıntent = new Intent();
-        ıntent.setType("image/*");//galeri açtırır daha sonra ıntent e action verelim
+        ıntent.setType("image/*");//fotoğraflsr açtırır daha sonra ıntent e action verelim
         ıntent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(ıntent, 777);
 
@@ -203,22 +202,22 @@ public class KullaniciPatientFragment extends Fragment {
             Uri path = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), path);
-                petEkleImageView.setImageBitmap(bitmap);
-                petEkleImageView.setVisibility(View.VISIBLE);
+                patientEkleImageView.setImageBitmap(bitmap);
+                patientEkleImageView.setVisibility(View.VISIBLE);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public void petEkle(final String musid, String petismi, String pettur, String petcins, String imageString, final AlertDialog alertDialog) {
-        Call<PetEkleModel> req = ManagerAll.getInstance().petEkle(musid, petismi, pettur, petcins, imageString);
-        req.enqueue(new Callback<PetEkleModel>() {
+    public void patientEkle(final String hemid, String patientismi, String patienttur, String patientcins, String imageString, final AlertDialog alertDialog) {
+        Call<PatientEkleModel> req = ManagerAll.getInstance().patientEkle(hemid, patientismi, patienttur, patientcins, imageString);
+        req.enqueue(new Callback<PatientEkleModel>() {
             @Override
-            public void onResponse(Call<PetEkleModel> call, Response<PetEkleModel> response) {
+            public void onResponse(Call<PatientEkleModel> call, Response<PatientEkleModel> response) {
 
                 if (response.body().isTf()) {
-                    getHasta(musid);
+                    getHasta(hemid);
                     Toast.makeText(getContext(), response.body().getText(), Toast.LENGTH_LONG).show();
                     alertDialog.cancel();
                 } else {
@@ -229,7 +228,7 @@ public class KullaniciPatientFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<PetEkleModel> call, Throwable t) {
+            public void onFailure(Call<PatientEkleModel> call, Throwable t) {
                 Toast.makeText(getContext(), Warnings.internetProblemText, Toast.LENGTH_LONG).show();
             }
         });
